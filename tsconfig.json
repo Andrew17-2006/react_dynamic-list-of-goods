@@ -5,7 +5,7 @@
   ],
   "compilerOptions": {
     "sourceMap": false,
-    "types": ["node", "cypress"],
+    "types": ["node", "cypress", "react", "react-dom"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   }
