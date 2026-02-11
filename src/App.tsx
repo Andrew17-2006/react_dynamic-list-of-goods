@@ -8,12 +8,14 @@ export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<'all' | 'first-five' | 'red' | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!mode) {
       return;
     }
 
+    setError(null);
     setLoading(true);
 
     const call =
@@ -21,6 +23,7 @@ export const App: React.FC = () => {
 
     call()
       .then(setGoods)
+      .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, [mode]);
 
@@ -46,6 +49,7 @@ export const App: React.FC = () => {
 
       {loading && <p>Loading...</p>}
 
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <GoodsList goods={goods} />
     </div>
   );
